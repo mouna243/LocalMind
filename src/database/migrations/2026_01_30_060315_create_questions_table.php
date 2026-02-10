@@ -16,7 +16,10 @@ return new class extends Migration {
             $table->string('title');
             $table->string('content');
             $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
 
         });
     }

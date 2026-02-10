@@ -1,0 +1,75 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+
+
+' =========================
+' UTILISATEUR & AUTH
+' =========================
+class User {
+  - id : int
+  - name : string
+  - email : string
+  - password : string
+  - role : string 
+  - createdAt : DateTime
+
+  + register()
+  + login()
+  + logout()
+}
+
+
+' =========================
+' QUESTIONS
+' =========================
+class Question {
+  - id : int
+  - title : string
+  - content : text
+  - location : string
+  - createdAt : DateTime
+  - userId : int
+
+  + create()
+  + update()
+  + delete()
+}
+
+User 1 --> 0..* Question : public
+
+
+' =========================
+' REPONSES
+' =========================
+class Answer {
+  - id : int
+  - content : text
+  - createdAt : DateTime
+  - userId : int
+  - questionId : int
+
+  + create()
+  + delete()
+}
+
+User 1 --> 0..* Answer : écrit
+Question 1 --> 0..* Answer : contient
+
+' =========================
+' FAVORIS
+' =========================
+class Favorite {
+  - id : int
+  - userId : int
+  - questionId : int
+  - createdAt : DateTime
+}
+
+User 1 --> 0..* Favorite
+Question 1 --> 0..* Favorite
+
+
+
+@enduml
+

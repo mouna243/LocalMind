@@ -2,22 +2,29 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Foundation\Auth\User as Authenticatable;
 
-abstract class User
+class User extends Authenticatable
 {
-    private $id;
-    private $email;
-    private $password;
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
 
-    public function login()
+    public function questions()
     {
-
+        return $this->hasMany(Question::class);
     }
-    public function signin()
+
+    public function likes()
     {
- }
+        return $this->hasMany(Like::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

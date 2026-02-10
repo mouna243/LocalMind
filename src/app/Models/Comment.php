@@ -1,7 +1,24 @@
 <?php
-class Comment{
-    private $id;
-    private $user_id;
-    private $question_id;
-    
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Comment extends Model
+{
+    protected $fillable = [
+        'user_id',
+        'question_id',
+        'content',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
 }
